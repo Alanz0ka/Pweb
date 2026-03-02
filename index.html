@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | Barbearia Do Junior</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+    <main class="login-container">
+        <section class="login-box">
+            <header>
+                <h1>Barbearia</h1>
+                <p>Entre para agendar seu horário</p>
+            </header>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit" class="btn-login">Entrar</button>
+
+                <div class="form-footer">
+                    <a href="esqueci-senha.html" class="link-secondary">Esqueci a senha</a>
+                </div>
+            </form>
+
+            <hr>
+
+            <footer class="signup-footer">
+                <span>Ainda não tem conta?</span>
+                <a href="register.html" class="btn-signup">Criar Cadastro</a>
+            </footer>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
