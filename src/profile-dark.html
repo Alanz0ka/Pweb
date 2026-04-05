@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteira de Investimento - Perfil</title>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+<div class="page dark-theme">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>Carteira de Investimento</h2>
+        <p>Sistema simples para acompanhar resultados e aportes</p>
+      </div>
+
+      <nav class="menu">
+        <a href="home-dark.html">Inicio</a>
+        <a href="dashboard-dark.html">Dashboard</a>
+        <a href="simulator-dark.html">Simulacao</a>
+        <a href="reports-dark.html">Relatorios</a>
+        <a class="active" href="profile-dark.html">Perfil</a>
+        <a href="settings-dark.html">Configuracoes</a>
+      </nav>
+
+      <a class="logout" href="../index-dark.html">Sair</a>
+    </aside>
+
+    <main class="content">
+      <div class="card">
+        <h1>Perfil</h1>
+        <p>Area para visualizar e editar os dados principais do usuario.</p>
+      </div>
+
+      <div class="profile-layout">
+        <div class="card profile-side">
+          <div class="avatar">AS</div>
+          <h3>Ana Souza</h3>
+          <p>Perfil moderado</p>
+          <p>E-mail: ana.souza@email.com</p>
+          <p>Plano: Controle Essencial</p>
+        </div>
+
+        <div class="card">
+          <h2>Editar dados</h2>
+
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" value="Ana Souza">
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" value="ana.souza@email.com">
+          </div>
+
+          <div class="form-group">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" value="Sao Paulo - SP">
+          </div>
+
+          <div class="form-group">
+            <label for="renda">Renda mensal</label>
+            <input type="text" id="renda" value="R$ 8.500">
+          </div>
+
+          <div class="form-group">
+            <label for="perfil">Perfil de risco</label>
+            <select id="perfil">
+              <option>Conservador</option>
+              <option selected>Moderado</option>
+              <option>Arrojado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="objetivo">Objetivo financeiro</label>
+            <textarea id="objetivo">Aumentar a reserva de emergencia e manter aportes mensais constantes.</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="button">Salvar alteracoes</button>
+            <a class="btn btn-secondary" href="dashboard-dark.html">Voltar</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

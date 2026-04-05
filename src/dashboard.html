@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteira de Investimento - Dashboard</title>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+<div class="page">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>Carteira de Investimento</h2>
+        <p>Sistema simples para acompanhar resultados e aportes</p>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Inicio</a>
+        <a class="active" href="dashboard.html">Dashboard</a>
+        <a href="simulator.html">Simulacao</a>
+        <a href="reports.html">Relatorios</a>
+        <a href="profile.html">Perfil</a>
+        <a href="settings.html">Configuracoes</a>
+      </nav>
+
+      <a class="logout" href="../index.html">Sair</a>
+    </aside>
+
+    <main class="content">
+      <div class="card">
+        <h1>Dashboard</h1>
+        <p>Area com graficos simples para mostrar a evolucao dos aportes e a distribuicao da carteira.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Patrimonio total</h3>
+          <p class="number">R$ 48.700</p>
+          <p>Valor total acumulado na carteira.</p>
+        </div>
+
+        <div class="card">
+          <h3>Aporte medio</h3>
+          <p class="number">R$ 1.420</p>
+          <p>Media de aporte mensal do usuario.</p>
+        </div>
+
+        <div class="card">
+          <h3>Meta do ano</h3>
+          <p class="number">72%</p>
+          <p>Percentual alcancado da meta anual.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Grafico de aportes</h2>
+          <p>Mesmas categorias da carteira em barras verticais.</p>
+
+          <div class="chart-bars">
+            <div class="bar-item">
+              <p class="bar-value">42%</p>
+              <div class="bar bar-category-1" style="height: 42%;"></div>
+              <span>Renda fixa</span>
+            </div>
+            <div class="bar-item">
+              <p class="bar-value">26%</p>
+              <div class="bar bar-category-2" style="height: 26%;"></div>
+              <span>Fundos imobiliarios</span>
+            </div>
+            <div class="bar-item">
+              <p class="bar-value">16%</p>
+              <div class="bar bar-category-3" style="height: 16%;"></div>
+              <span>Acoes</span>
+            </div>
+            <div class="bar-item">
+              <p class="bar-value">16%</p>
+              <div class="bar bar-category-4" style="height: 16%;"></div>
+              <span>Reserva</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Distribuicao da carteira</h2>
+          <p>Percentual de cada tipo de investimento.</p>
+
+          <div class="pie-layout">
+            <div class="pie-chart">
+              <div class="pie-center">
+                <strong>Carteira</strong>
+                <span>100%</span>
+              </div>
+            </div>
+
+            <div class="pie-legend">
+              <div class="legend-item">
+                <div class="legend-name">
+                  <span class="legend-color legend-color-1"></span>
+                  <span>Renda fixa</span>
+                </div>
+                <span class="legend-value">42%</span>
+              </div>
+
+              <div class="legend-item">
+                <div class="legend-name">
+                  <span class="legend-color legend-color-2"></span>
+                  <span>Fundos imobiliarios</span>
+                </div>
+                <span class="legend-value">26%</span>
+              </div>
+
+              <div class="legend-item">
+                <div class="legend-name">
+                  <span class="legend-color legend-color-3"></span>
+                  <span>Acoes</span>
+                </div>
+                <span class="legend-value">16%</span>
+              </div>
+
+              <div class="legend-item">
+                <div class="legend-name">
+                  <span class="legend-color legend-color-4"></span>
+                  <span>Reserva</span>
+                </div>
+                <span class="legend-value">16%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Leitura do dashboard</h2>
+        <ul class="small-list">
+          <li>Os aportes cresceram nos ultimos meses</li>
+          <li>A maior parte da carteira esta em renda fixa</li>
+          <li>A meta anual esta em andamento</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteira de Investimento - Simulacao</title>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+<div class="page">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>Carteira de Investimento</h2>
+        <p>Sistema simples para acompanhar resultados e aportes</p>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Inicio</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a class="active" href="simulator.html">Simulacao</a>
+        <a href="reports.html">Relatorios</a>
+        <a href="profile.html">Perfil</a>
+        <a href="settings.html">Configuracoes</a>
+      </nav>
+
+      <a class="logout" href="../index.html">Sair</a>
+    </aside>
+
+    <main class="content">
+      <div class="card">
+        <h1>Simulacao de aporte</h1>
+        <p>Pagina para simular um investimento com aporte inicial, valor mensal, taxa de rendimento e tempo.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Dados da simulacao</h2>
+
+          <div class="form-group">
+            <label for="valor-inicial">Valor inicial</label>
+            <input type="text" id="valor-inicial" value="R$ 5.000">
+          </div>
+
+          <div class="form-group">
+            <label for="aporte-mensal">Aporte mensal</label>
+            <input type="text" id="aporte-mensal" value="R$ 500">
+          </div>
+
+          <div class="form-group">
+            <label for="taxa">Taxa de rendimento mensal</label>
+            <input type="text" id="taxa" value="0,8%">
+          </div>
+
+          <div class="form-group">
+            <label for="tempo">Tempo de investimento</label>
+            <input type="text" id="tempo" value="24 meses">
+          </div>
+
+          <button class="btn" type="button">Simular</button>
+        </div>
+
+        <div class="card">
+          <h2>Resultado da simulacao</h2>
+          <p>Exemplo de resultado para os dados preenchidos ao lado.</p>
+
+          <div class="sim-result">
+            <h3>Valor final estimado</h3>
+            <p class="number">R$ 19.840</p>
+            <p>Resultado considerando os aportes mensais durante 24 meses.</p>
+          </div>
+
+          <div class="sim-result">
+            <h3>Total investido</h3>
+            <p class="number">R$ 17.000</p>
+            <p>Soma do valor inicial com todos os aportes mensais.</p>
+          </div>
+
+          <div class="sim-result">
+            <h3>Rendimento estimado</h3>
+            <p class="number">R$ 2.840</p>
+            <p>Diferenca entre o valor total investido e o valor final estimado.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>
