@@ -6,13 +6,12 @@
   <title>Carteira de Investimento - Configuracoes</title>
   <link rel="stylesheet" href="../styles/style.css">
   <script>
-    try {
-      if (localStorage.getItem('investApp.theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch (e) {}
+    if (localStorage.getItem('tema') === 'escuro') {
+      document.documentElement.classList.add('tema-escuro');
+    }
   </script>
-  <script src="../js/app.js" defer></script>
+  <script src="../js/tema.js" defer></script>
+  <script src="../js/sair.js" defer></script>
 </head>
 <body>
 
@@ -33,11 +32,11 @@
         <a class="active" href="settings.html">Configuracoes</a>
       </nav>
 
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-        <span data-theme-label>Modo escuro</span>
+      <button class="theme-toggle" type="button" id="btn-tema" aria-pressed="false">
+        <span class="label-tema">Modo escuro</span>
       </button>
 
-      <button class="logout" type="button" data-logout="../index.html">Sair</button>
+      <button class="logout" type="button" id="btn-sair">Sair</button>
     </aside>
 
     <main class="content">
@@ -47,7 +46,7 @@
       </div>
 
       <div class="theme-options">
-        <button class="card theme-card theme-card-dark" type="button" data-theme-card="dark">
+        <button class="card card-tema theme-card-dark" type="button" data-tema="escuro">
           <div class="theme-card-top">
             <h3>Tema escuro</h3>
             <span class="theme-status">Selecionar</span>
@@ -60,7 +59,7 @@
           <p>Ideal para dar mais destaque ao menu e aos cards do painel.</p>
         </button>
 
-        <button class="card theme-card theme-card-light selected-theme" type="button" data-theme-card="light">
+        <button class="card card-tema theme-card-light selected-theme" type="button" data-tema="claro">
           <div class="theme-card-top">
             <h3>Tema claro</h3>
             <span class="theme-status">Ativo</span>

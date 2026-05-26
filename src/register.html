@@ -6,42 +6,42 @@
   <title>Carteira de Investimento - Cadastro</title>
   <link rel="stylesheet" href="../styles/style.css">
   <script>
-    try {
-      if (localStorage.getItem('investApp.theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch (e) {}
+    if (localStorage.getItem('tema') === 'escuro') {
+      document.documentElement.classList.add('tema-escuro');
+    }
   </script>
-  <script src="../js/app.js" defer></script>
+  <script src="../js/tema.js" defer></script>
+  <script src="../js/validacao.js" defer></script>
+  <script src="../js/cadastro.js" defer></script>
 </head>
 <body class="auth-page">
 
-  <button class="auth-toggle" type="button" data-theme-toggle aria-pressed="false">
-    <span data-theme-label>Modo escuro</span>
+  <button class="auth-toggle" type="button" id="btn-tema" aria-pressed="false">
+    <span class="label-tema">Modo escuro</span>
   </button>
 
-  <form class="auth-card" data-form-message="Cadastro realizado com sucesso." data-form-next="home.html">
+  <form class="auth-card" id="form-cadastro" novalidate>
     <h1>Cadastro</h1>
     <p>Preencha os dados abaixo para criar acesso ao sistema Carteira de Investimento.</p>
 
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input type="text" id="nome" placeholder="Digite seu nome" required>
+      <input type="text" id="nome" placeholder="Digite seu nome">
     </div>
 
     <div class="form-group">
       <label for="cad-email">E-mail</label>
-      <input type="email" id="cad-email" placeholder="Digite seu e-mail" required>
+      <input type="email" id="cad-email" placeholder="Digite seu e-mail">
     </div>
 
     <div class="form-group">
       <label for="cad-senha">Senha</label>
-      <input type="password" id="cad-senha" placeholder="Digite sua senha" required>
+      <input type="password" id="cad-senha" placeholder="Pelo menos 6 caracteres">
     </div>
 
     <div class="form-group">
       <label for="confirmar">Confirmar senha</label>
-      <input type="password" id="confirmar" placeholder="Confirme sua senha" required>
+      <input type="password" id="confirmar" placeholder="Repita a senha">
     </div>
 
     <button class="btn full" type="submit">Cadastrar</button>

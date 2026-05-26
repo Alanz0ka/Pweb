@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carteira de Investimento - Inicio</title>
-<link rel="stylesheet" href="../styles/style.css">
-<script>
-  try {
-    if (localStorage.getItem('investApp.theme') === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteira de Investimento - Inicio</title>
+  <link rel="stylesheet" href="../styles/style.css">
+  <script>
+    if (localStorage.getItem('tema') === 'escuro') {
+      document.documentElement.classList.add('tema-escuro');
     }
-  } catch (e) {}
-</script>
-<script src="../js/app.js" defer></script>
+  </script>
+  <script src="../js/tema.js" defer></script>
+  <script src="../js/sair.js" defer></script>
+  <script src="../js/home.js" defer></script>
 </head>
 <body>
 
@@ -33,14 +33,19 @@
         <a href="settings.html">Configuracoes</a>
       </nav>
 
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-        <span data-theme-label>Modo escuro</span>
+      <button class="theme-toggle" type="button" id="btn-tema" aria-pressed="false">
+        <span class="label-tema">Modo escuro</span>
       </button>
 
-      <button class="logout" type="button" data-logout="../index.html">Sair</button>
+      <button class="logout" type="button" id="btn-sair">Sair</button>
     </aside>
 
     <main class="content">
+      <div class="card">
+        <h1 class="saudacao" id="saudacao">Ola!</h1>
+        <p class="data-atual" id="data-atual"></p>
+      </div>
+
       <div class="grid-2">
         <div class="card">
           <h3>Patrimonio total</h3>

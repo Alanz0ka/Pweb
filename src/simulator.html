@@ -6,13 +6,13 @@
   <title>Carteira de Investimento - Simulacao</title>
   <link rel="stylesheet" href="../styles/style.css">
   <script>
-    try {
-      if (localStorage.getItem('investApp.theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch (e) {}
+    if (localStorage.getItem('tema') === 'escuro') {
+      document.documentElement.classList.add('tema-escuro');
+    }
   </script>
-  <script src="../js/app.js" defer></script>
+  <script src="../js/tema.js" defer></script>
+  <script src="../js/sair.js" defer></script>
+  <script src="../js/simulador.js" defer></script>
 </head>
 <body>
 
@@ -33,11 +33,11 @@
         <a href="settings.html">Configuracoes</a>
       </nav>
 
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-        <span data-theme-label>Modo escuro</span>
+      <button class="theme-toggle" type="button" id="btn-tema" aria-pressed="false">
+        <span class="label-tema">Modo escuro</span>
       </button>
 
-      <button class="logout" type="button" data-logout="../index.html">Sair</button>
+      <button class="logout" type="button" id="btn-sair">Sair</button>
     </aside>
 
     <main class="content">
@@ -47,7 +47,7 @@
       </div>
 
       <div class="grid-2">
-        <form class="card" data-sim-form>
+        <form class="card" id="form-simulador" novalidate>
           <h2>Dados da simulacao</h2>
 
           <div class="form-group">
@@ -75,23 +75,23 @@
 
         <div class="card">
           <h2>Resultado da simulacao</h2>
-          <p>Preencha os dados ao lado e clique em Simular para ver o resultado.</p>
+          <p>Os valores abaixo sao recalculados ao clicar em Simular.</p>
 
           <div class="sim-result">
             <h3>Valor final estimado</h3>
-            <p class="number" data-sim-final>R$ 19.840,00</p>
-            <p data-sim-final-desc>Resultado considerando os aportes mensais durante 24 meses.</p>
+            <p class="number" id="resultado-final">R$ 0,00</p>
+            <p id="descricao-final">Resultado considerando os aportes mensais.</p>
           </div>
 
           <div class="sim-result">
             <h3>Total investido</h3>
-            <p class="number" data-sim-total>R$ 17.000,00</p>
+            <p class="number" id="resultado-total">R$ 0,00</p>
             <p>Soma do valor inicial com todos os aportes mensais.</p>
           </div>
 
           <div class="sim-result">
             <h3>Rendimento estimado</h3>
-            <p class="number" data-sim-rendimento>R$ 2.840,00</p>
+            <p class="number" id="resultado-rendimento">R$ 0,00</p>
             <p>Diferenca entre o valor total investido e o valor final estimado.</p>
           </div>
         </div>

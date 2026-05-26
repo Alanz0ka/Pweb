@@ -6,13 +6,14 @@
   <title>Carteira de Investimento - Perfil</title>
   <link rel="stylesheet" href="../styles/style.css">
   <script>
-    try {
-      if (localStorage.getItem('investApp.theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch (e) {}
+    if (localStorage.getItem('tema') === 'escuro') {
+      document.documentElement.classList.add('tema-escuro');
+    }
   </script>
-  <script src="../js/app.js" defer></script>
+  <script src="../js/tema.js" defer></script>
+  <script src="../js/validacao.js" defer></script>
+  <script src="../js/sair.js" defer></script>
+  <script src="../js/perfil.js" defer></script>
 </head>
 <body>
 
@@ -33,11 +34,11 @@
         <a href="settings.html">Configuracoes</a>
       </nav>
 
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-        <span data-theme-label>Modo escuro</span>
+      <button class="theme-toggle" type="button" id="btn-tema" aria-pressed="false">
+        <span class="label-tema">Modo escuro</span>
       </button>
 
-      <button class="logout" type="button" data-logout="../index.html">Sair</button>
+      <button class="logout" type="button" id="btn-sair">Sair</button>
     </aside>
 
     <main class="content">
@@ -55,7 +56,7 @@
           <p>Plano: Controle Essencial</p>
         </div>
 
-        <form class="card" data-form-message="Alteracoes salvas com sucesso.">
+        <form class="card" id="form-perfil" novalidate>
           <h2>Editar dados</h2>
 
           <div class="form-group">
@@ -94,7 +95,7 @@
 
           <div class="actions">
             <button class="btn" type="submit">Salvar alteracoes</button>
-            <button class="btn btn-secondary" type="button" data-href="dashboard.html">Voltar</button>
+            <button class="btn btn-secondary" type="button" id="btn-voltar">Voltar</button>
           </div>
         </form>
       </div>
