@@ -103,22 +103,21 @@ textarea {
   line-height: 1.6
 }
 
-.dark-auth {
+[data-theme="dark"] body.auth-page {
   background: #0f172a
 }
 
-.dark-auth .auth-card {
+[data-theme="dark"] .auth-card {
   background: #1e293b;
   border: 1px solid #334155
 }
 
-.dark-auth .auth-card h1,
-.dark-auth .form-group label {
+[data-theme="dark"] .auth-card h1 {
   color: #e5e7eb
 }
 
-.dark-auth .auth-card p,
-.dark-auth .links a {
+[data-theme="dark"] .auth-card p,
+[data-theme="dark"] .links a {
   color: #94a3b8
 }
 
@@ -143,7 +142,7 @@ textarea {
   color: var(--text)
 }
 
-.page.dark-theme {
+[data-theme="dark"] .page {
   --bg: #0f172a;
   --card: #1e293b;
   --sidebar: #111827;
@@ -160,17 +159,17 @@ textarea {
   --grid: #334155
 }
 
-:is(.dark-auth, .page.dark-theme) .form-group label {
+[data-theme="dark"] .form-group label {
   color: #e5e7eb
 }
 
-:is(.dark-auth, .page.dark-theme) :is(input, select, textarea) {
+[data-theme="dark"] :is(input, select, textarea) {
   background: #0f172a;
   border-color: #334155;
   color: #e5e7eb
 }
 
-:is(.dark-auth, .page.dark-theme) .btn-secondary {
+[data-theme="dark"] .btn-secondary {
   background: #334155;
   color: #e5e7eb
 }
@@ -589,6 +588,63 @@ td {
 
 .dark-preview .preview-box {
   background: #334155
+}
+
+button.btn,
+button.logout,
+button.theme-card {
+  font: inherit
+}
+
+button.logout {
+  width: 100%;
+  border: 0
+}
+
+button.theme-card {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--card)
+}
+
+.theme-toggle {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, .06);
+  color: var(--side-text);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, .16)
+}
+
+.auth-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  padding: 8px 14px;
+  background: #fff;
+  color: #1f2937;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer
+}
+
+[data-theme="dark"] .auth-toggle {
+  background: #1e293b;
+  color: #e5e7eb;
+  border-color: #334155
 }
 
 @media (max-width:900px) {

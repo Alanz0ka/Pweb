@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carteira de Investimento - Simulacao</title>
   <link rel="stylesheet" href="../styles/style.css">
+  <script>
+    try {
+      if (localStorage.getItem('investApp.theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {}
+  </script>
+  <script src="../js/app.js" defer></script>
 </head>
 <body>
 
@@ -25,7 +33,11 @@
         <a href="settings.html">Configuracoes</a>
       </nav>
 
-      <a class="logout" href="../index.html">Sair</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+        <span data-theme-label>Modo escuro</span>
+      </button>
+
+      <button class="logout" type="button" data-logout="../index.html">Sair</button>
     </aside>
 
     <main class="content">
@@ -35,7 +47,7 @@
       </div>
 
       <div class="grid-2">
-        <div class="card">
+        <form class="card" data-sim-form>
           <h2>Dados da simulacao</h2>
 
           <div class="form-group">
@@ -58,28 +70,28 @@
             <input type="text" id="tempo" value="24 meses">
           </div>
 
-          <button class="btn" type="button">Simular</button>
-        </div>
+          <button class="btn" type="submit">Simular</button>
+        </form>
 
         <div class="card">
           <h2>Resultado da simulacao</h2>
-          <p>Exemplo de resultado para os dados preenchidos ao lado.</p>
+          <p>Preencha os dados ao lado e clique em Simular para ver o resultado.</p>
 
           <div class="sim-result">
             <h3>Valor final estimado</h3>
-            <p class="number">R$ 19.840</p>
-            <p>Resultado considerando os aportes mensais durante 24 meses.</p>
+            <p class="number" data-sim-final>R$ 19.840,00</p>
+            <p data-sim-final-desc>Resultado considerando os aportes mensais durante 24 meses.</p>
           </div>
 
           <div class="sim-result">
             <h3>Total investido</h3>
-            <p class="number">R$ 17.000</p>
+            <p class="number" data-sim-total>R$ 17.000,00</p>
             <p>Soma do valor inicial com todos os aportes mensais.</p>
           </div>
 
           <div class="sim-result">
             <h3>Rendimento estimado</h3>
-            <p class="number">R$ 2.840</p>
+            <p class="number" data-sim-rendimento>R$ 2.840,00</p>
             <p>Diferenca entre o valor total investido e o valor final estimado.</p>
           </div>
         </div>
