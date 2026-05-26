@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carteira de Investimento - Inicio</title>
 <link rel="stylesheet" href="../styles/style.css">
+<script>
+  try {
+    if (localStorage.getItem('investApp.theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch (e) {}
+</script>
+<script src="../js/app.js" defer></script>
 </head>
 <body>
 
@@ -25,7 +33,11 @@
         <a href="settings.html">Configuracoes</a>
       </nav>
 
-      <a class="logout" href="../index.html">Sair</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+        <span data-theme-label>Modo escuro</span>
+      </button>
+
+      <button class="logout" type="button" data-logout="../index.html">Sair</button>
     </aside>
 
     <main class="content">
