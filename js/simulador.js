@@ -8,25 +8,28 @@
  *   saldo = saldo * (1 + taxa) + aporte_mensal
  */
 
-function valorParaNumero(texto) {
-  // Pega uma string tipo "R$ 5.000,50" e devolve 5000.5
-  const limpo = String(texto).replace(/[^\d,]/g, '').replace(',', '.');
-  const numero = parseFloat(limpo);
-  return isNaN(numero) ? 0 : numero;
-}
+function textoParaNumero(texto) {
+  // Pega textos como "R$ 5.000,50" ou "0,8%" e devolve um numero.
+  var limpo = String(texto).trim();
+  limpo = limpo.replace('R$', '');
+  limpo = limpo.replace('%', '');
+  limpo = limpo.split('.').join('');
+  limpo = limpo.replace(',', '.');
+  limpo = limpo.trim();
 
-function porcentagemParaNumero(texto) {
-  // Pega "0,8%" e devolve 0.8
-  const limpo = String(texto).replace(/[^\d,]/g, '').replace(',', '.');
-  const numero = parseFloat(limpo);
-  return isNaN(numero) ? 0 : numero;
+  if (limpo === '') return NaN;
+  return Number(limpo);
 }
 
 function mesesParaNumero(texto) {
   // Pega "24 meses" e devolve 24
-  const limpo = String(texto).replace(/\D/g, '');
-  const numero = parseInt(limpo, 10);
-  return isNaN(numero) ? 0 : numero;
+  var limpo = String(texto).toLowerCase().trim();
+  limpo = limpo.replace('meses', '');
+  limpo = limpo.replace('mes', '');
+  limpo = limpo.trim();
+
+  if (limpo === '') return NaN;
+  return Number(limpo);
 }
 
 function formatarReal(valor) {
@@ -37,25 +40,40 @@ function formatarReal(valor) {
 }
 
 function calcularSimulacao() {
-  const inicial = valorParaNumero(document.getElementById('valor-inicial').value);
-  const mensal = valorParaNumero(document.getElementById('aporte-mensal').value);
-  const taxa = porcentagemParaNumero(document.getElementById('taxa').value) / 100;
-  const meses = mesesParaNumero(document.getElementById('tempo').value);
+  var inicial = textoParaNumero(document.getElementById('valor-inicial').value);
+  var mensal = textoParaNumero(document.getElementById('aporte-mensal').value);
+  var taxaPercentual = textoParaNumero(document.getElementById('taxa').value);
+  var meses = mesesParaNumero(document.getElementById('tempo').value);
 
-  if (meses <= 0) {
+  if (isNaN(inicial) || inicial < 0) {
+    alert('Informe um valor inicial valido.');
+    return;
+  }
+  if (isNaN(mensal) || mensal < 0) {
+    alert('Informe um aporte mensal valido.');
+    return;
+  }
+  if (isNaN(taxaPercentual) || taxaPercentual <= -100) {
+    alert('Informe uma taxa mensal valida.');
+    return;
+  }
+  if (isNaN(meses) || meses <= 0 || meses % 1 !== 0) {
     alert('Informe um tempo de investimento valido (em meses).');
     return;
   }
 
+  var taxa = taxaPercentual / 100;
+
   // Juros compostos com aporte mensal: a cada mes o saldo rende
   // e depois soma o aporte do mes.
-  let valorFinal = inicial;
-  for (let i = 0; i < meses; i++) {
+  var valorFinal = inicial;
+  var i;
+  for (i = 0; i < meses; i++) {
     valorFinal = valorFinal * (1 + taxa) + mensal;
   }
 
-  const totalInvestido = inicial + (mensal * meses);
-  const rendimento = valorFinal - totalInvestido;
+  var totalInvestido = inicial + (mensal * meses);
+  var rendimento = valorFinal - totalInvestido;
 
   document.getElementById('resultado-final').textContent = formatarReal(valorFinal);
   document.getElementById('resultado-total').textContent = formatarReal(totalInvestido);
@@ -65,7 +83,7 @@ function calcularSimulacao() {
 }
 
 function configurarSimulador() {
-  const form = document.getElementById('form-simulador');
+  var form = document.getElementById('form-simulador');
   if (!form) return;
 
   form.addEventListener('submit', function (evento) {

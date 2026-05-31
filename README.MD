@@ -12,13 +12,13 @@ relatorios, perfil do usuario, simulador de juros compostos e
 configuracoes com troca de tema claro/escuro.
 
 Todos os dados sao mockados ou guardados no `localStorage` do navegador
-(perfil, e-mail lembrado, tema). Nao tem backend.
+(conta local, perfil, e-mail lembrado, sessao e tema). Nao tem backend.
 
 ## 🛠️ Tecnologias
 
 - **HTML5** - Estrutura semantica das paginas
 - **CSS3** - Estilizacao, variaveis CSS e tema escuro
-- **JavaScript (ES6+)** - Validacoes, simulador e troca de tema
+- **JavaScript puro** - Validacoes, simulador e troca de tema
 
 ## 📁 Estrutura do Projeto
 
@@ -32,6 +32,7 @@ Pweb/
 │   └── style.css           # Folha de estilos unica
 ├── js/                     # Um arquivo por responsabilidade
 │   ├── tema.js             # Tema claro/escuro (todas as paginas)
+│   ├── autenticacao.js     # Protecao das paginas internas
 │   ├── validacao.js        # Funcoes auxiliares de validacao
 │   ├── login.js            # Tela de login
 │   ├── cadastro.js         # Tela de cadastro
@@ -60,13 +61,14 @@ Pweb/
 2. Abra o arquivo `index.html` em qualquer navegador moderno.
 3. Pronto, nao tem nada para instalar!
 
-> Dica: na tela de login pode entrar com qualquer e-mail valido e senha
-> de pelo menos 6 caracteres.
+> Dica: primeiro crie uma conta na tela de cadastro. Depois entre com o
+> mesmo e-mail e senha cadastrados.
 
 ## ✨ Funcionalidades
 
-- **Login, cadastro e recuperacao de senha** com validacao (regex de
-  e-mail, tamanho minimo de senha, confirmacao de senha).
+- **Login, cadastro e recuperacao de senha** com validacao de e-mail,
+  tamanho minimo de senha e confirmacao de senha.
+- **Acesso protegido** nas paginas internas, liberado depois do login.
 - **Mensagens de erro inline** abaixo dos campos.
 - **"Lembrar meu e-mail"** no login (persistido no `localStorage`).
 - **Tema claro / escuro** com toggle na sidebar (e nas telas de auth)
@@ -92,12 +94,12 @@ Cada pagina importa apenas os scripts que precisa. A ordem dos
 | `index.html`          | `tema.js`, `validacao.js`, `login.js`               |
 | `src/register.html`   | `tema.js`, `validacao.js`, `cadastro.js`            |
 | `src/forgot-password` | `tema.js`, `validacao.js`, `recuperar.js`           |
-| `src/home.html`       | `tema.js`, `sair.js`, `home.js`                     |
-| `src/dashboard.html`  | `tema.js`, `sair.js`                                |
-| `src/reports.html`    | `tema.js`, `sair.js`                                |
-| `src/settings.html`   | `tema.js`, `sair.js`                                |
-| `src/profile.html`    | `tema.js`, `validacao.js`, `sair.js`, `perfil.js`   |
-| `src/simulator.html`  | `tema.js`, `sair.js`, `simulador.js`                |
+| `src/home.html`       | `autenticacao.js`, `tema.js`, `sair.js`, `home.js`                   |
+| `src/dashboard.html`  | `autenticacao.js`, `tema.js`, `sair.js`                              |
+| `src/reports.html`    | `autenticacao.js`, `tema.js`, `sair.js`                              |
+| `src/settings.html`   | `autenticacao.js`, `tema.js`, `sair.js`                              |
+| `src/profile.html`    | `autenticacao.js`, `tema.js`, `validacao.js`, `sair.js`, `perfil.js` |
+| `src/simulator.html`  | `autenticacao.js`, `tema.js`, `sair.js`, `simulador.js`              |
 
 ## 📄 Licenca
 

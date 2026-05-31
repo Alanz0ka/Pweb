@@ -6,12 +6,13 @@
  * no localStorage com a chave 'tema'.
  */
 
-const CHAVE_TEMA = 'tema';
+var CHAVE_TEMA = 'tema';
 
 function temaSalvo() {
   // Le o tema do localStorage. Se nao tiver nada, usa 'claro'.
-  const valor = localStorage.getItem(CHAVE_TEMA);
-  return valor === 'escuro' ? 'escuro' : 'claro';
+  var valor = localStorage.getItem(CHAVE_TEMA);
+  if (valor === 'escuro') return 'escuro';
+  return 'claro';
 }
 
 function aplicarTema(tema) {
@@ -31,26 +32,38 @@ function salvarTema(tema) {
 }
 
 function trocarTema() {
-  const novo = temaSalvo() === 'escuro' ? 'claro' : 'escuro';
+  var novo = 'escuro';
+  if (temaSalvo() === 'escuro') novo = 'claro';
   salvarTema(novo);
 }
 
 function atualizarBotaoTema(tema) {
-  const botao = document.getElementById('btn-tema');
+  var botao = document.getElementById('btn-tema');
   if (!botao) return;
-  const label = botao.querySelector('.label-tema');
+  var label = botao.querySelector('.label-tema');
   if (label) {
-    label.textContent = tema === 'escuro' ? 'Modo claro' : 'Modo escuro';
+    if (tema === 'escuro') {
+      label.textContent = 'Modo claro';
+    } else {
+      label.textContent = 'Modo escuro';
+    }
   }
-  botao.setAttribute('aria-pressed', tema === 'escuro' ? 'true' : 'false');
+  if (tema === 'escuro') {
+    botao.setAttribute('aria-pressed', 'true');
+  } else {
+    botao.setAttribute('aria-pressed', 'false');
+  }
 }
 
 function atualizarCardsTema(tema) {
   // Usado na pagina de configuracoes para marcar qual card esta ativo.
-  const cards = document.querySelectorAll('.card-tema');
-  cards.forEach(function (card) {
-    const valor = card.dataset.tema;
-    const status = card.querySelector('.theme-status');
+  var cards = document.querySelectorAll('.card-tema');
+  var i;
+
+  for (i = 0; i < cards.length; i++) {
+    var card = cards[i];
+    var valor = card.getAttribute('data-tema');
+    var status = card.querySelector('.theme-status');
     if (valor === tema) {
       card.classList.add('selected-theme');
       if (status) status.textContent = 'Ativo';
@@ -58,19 +71,21 @@ function atualizarCardsTema(tema) {
       card.classList.remove('selected-theme');
       if (status) status.textContent = 'Selecionar';
     }
-  });
+  }
 }
 
 function configurarTema() {
-  const botao = document.getElementById('btn-tema');
+  var botao = document.getElementById('btn-tema');
   if (botao) {
     botao.addEventListener('click', trocarTema);
   }
-  document.querySelectorAll('.card-tema').forEach(function (card) {
-    card.addEventListener('click', function () {
-      salvarTema(card.dataset.tema);
+  var cards = document.querySelectorAll('.card-tema');
+  var i;
+  for (i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', function () {
+      salvarTema(this.getAttribute('data-tema'));
     });
-  });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {

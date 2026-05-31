@@ -5,10 +5,12 @@
  * Carrega os dados salvos no localStorage e salva qualquer alteracao.
  */
 
-const CHAVE_PERFIL = 'perfilUsuario';
+var CHAVE_PERFIL = 'perfilUsuario';
+var CHAVE_CONTA_PERFIL = 'contaUsuario';
+var CHAVE_SESSAO_PERFIL = 'usuarioLogado';
 
 function carregarPerfil() {
-  const texto = localStorage.getItem(CHAVE_PERFIL);
+  var texto = localStorage.getItem(CHAVE_PERFIL);
   if (!texto) return null;
   try {
     return JSON.parse(texto);
@@ -18,40 +20,87 @@ function carregarPerfil() {
   }
 }
 
+function iniciaisDoNome(nome) {
+  var partes = nome.trim().split(' ');
+  var iniciais = '';
+  var i;
+
+  for (i = 0; i < partes.length; i++) {
+    if (partes[i] !== '') {
+      iniciais = iniciais + partes[i].charAt(0).toUpperCase();
+    }
+    if (iniciais.length === 2) break;
+  }
+
+  return iniciais;
+}
+
+function atualizarResumoPerfil(dados) {
+  if (!dados) return;
+
+  var avatar = document.getElementById('resumo-avatar');
+  var nome = document.getElementById('resumo-nome');
+  var perfil = document.getElementById('resumo-perfil');
+  var email = document.getElementById('resumo-email');
+
+  if (avatar && dados.nome) avatar.textContent = iniciaisDoNome(dados.nome);
+  if (nome && dados.nome) nome.textContent = dados.nome;
+  if (perfil && dados.perfil) perfil.textContent = 'Perfil ' + dados.perfil.toLowerCase();
+  if (email && dados.email) email.textContent = 'E-mail: ' + dados.email;
+}
+
+function atualizarContaPerfil(dados) {
+  var texto = localStorage.getItem(CHAVE_CONTA_PERFIL);
+  if (!texto) return;
+
+  try {
+    var conta = JSON.parse(texto);
+    conta.nome = dados.nome;
+    conta.email = dados.email;
+    localStorage.setItem(CHAVE_CONTA_PERFIL, JSON.stringify(conta));
+    localStorage.setItem(CHAVE_SESSAO_PERFIL, dados.email);
+  } catch (e) {
+    return;
+  }
+}
+
 function configurarPerfil() {
-  const form = document.getElementById('form-perfil');
+  var form = document.getElementById('form-perfil');
   if (!form) return;
 
   // Se ja tiver dados salvos, preenche os campos com eles.
-  const salvos = carregarPerfil();
+  var salvos = carregarPerfil();
   if (salvos) {
-    for (const campo in salvos) {
-      const input = document.getElementById(campo);
+    for (var campo in salvos) {
+      var input = document.getElementById(campo);
       if (input) input.value = salvos[campo];
     }
+    atualizarResumoPerfil(salvos);
   }
 
   form.addEventListener('submit', function (evento) {
     evento.preventDefault();
     limparErros(form);
 
-    const nome = document.getElementById('nome');
-    const email = document.getElementById('email');
+    var nome = document.getElementById('nome');
+    var email = document.getElementById('email');
+    var nomeLimpo = nome.value.trim();
+    var emailLimpo = email.value.trim().toLowerCase();
 
-    let ok = true;
-    if (nome.value.trim().length < 3) {
+    var ok = true;
+    if (nomeLimpo.length < 3) {
       mostrarErro(nome, 'Informe seu nome.');
       ok = false;
     }
-    if (!emailValido(email.value)) {
+    if (!emailValido(emailLimpo)) {
       mostrarErro(email, 'Informe um e-mail valido.');
       ok = false;
     }
     if (!ok) return;
 
-    const dados = {
-      nome: nome.value,
-      email: email.value,
+    var dados = {
+      nome: nomeLimpo,
+      email: emailLimpo,
       cidade: document.getElementById('cidade').value,
       renda: document.getElementById('renda').value,
       perfil: document.getElementById('perfil').value,
@@ -59,10 +108,12 @@ function configurarPerfil() {
     };
 
     localStorage.setItem(CHAVE_PERFIL, JSON.stringify(dados));
+    atualizarContaPerfil(dados);
+    atualizarResumoPerfil(dados);
     alert('Alteracoes salvas com sucesso!');
   });
 
-  const btnVoltar = document.getElementById('btn-voltar');
+  var btnVoltar = document.getElementById('btn-voltar');
   if (btnVoltar) {
     btnVoltar.addEventListener('click', function () {
       window.location.href = 'dashboard.html';

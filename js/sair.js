@@ -6,10 +6,11 @@
  */
 
 function configurarSair() {
-  const botao = document.getElementById('btn-sair');
+  var botao = document.getElementById('btn-sair');
   if (!botao) return;
   botao.addEventListener('click', function () {
     if (confirm('Deseja sair do sistema?')) {
+      localStorage.removeItem('usuarioLogado');
       window.location.href = '../index.html';
     }
   });

@@ -5,25 +5,31 @@
  * Valida nome, e-mail, senha (minimo 6) e confirmacao de senha.
  */
 
+var CHAVE_CONTA_CADASTRO = 'contaUsuario';
+var CHAVE_PERFIL_CADASTRO = 'perfilUsuario';
+var CHAVE_SESSAO_CADASTRO = 'usuarioLogado';
+
 function configurarCadastro() {
-  const form = document.getElementById('form-cadastro');
+  var form = document.getElementById('form-cadastro');
   if (!form) return;
 
   form.addEventListener('submit', function (evento) {
     evento.preventDefault();
     limparErros(form);
 
-    const nome = document.getElementById('nome');
-    const email = document.getElementById('cad-email');
-    const senha = document.getElementById('cad-senha');
-    const confirmar = document.getElementById('confirmar');
+    var nome = document.getElementById('nome');
+    var email = document.getElementById('cad-email');
+    var senha = document.getElementById('cad-senha');
+    var confirmar = document.getElementById('confirmar');
+    var nomeLimpo = nome.value.trim();
+    var emailLimpo = email.value.trim().toLowerCase();
 
-    let ok = true;
-    if (nome.value.trim().length < 3) {
+    var ok = true;
+    if (nomeLimpo.length < 3) {
       mostrarErro(nome, 'Informe seu nome completo.');
       ok = false;
     }
-    if (!emailValido(email.value)) {
+    if (!emailValido(emailLimpo)) {
       mostrarErro(email, 'Informe um e-mail valido.');
       ok = false;
     }
@@ -37,7 +43,25 @@ function configurarCadastro() {
     }
     if (!ok) return;
 
-    alert('Cadastro realizado com sucesso, ' + nome.value.split(' ')[0] + '!');
+    var conta = {
+      nome: nomeLimpo,
+      email: emailLimpo,
+      senha: senha.value
+    };
+
+    var perfil = {
+      nome: nomeLimpo,
+      email: emailLimpo,
+      cidade: '',
+      renda: '',
+      perfil: 'Moderado',
+      objetivo: ''
+    };
+
+    localStorage.setItem(CHAVE_CONTA_CADASTRO, JSON.stringify(conta));
+    localStorage.setItem(CHAVE_PERFIL_CADASTRO, JSON.stringify(perfil));
+    localStorage.setItem(CHAVE_SESSAO_CADASTRO, emailLimpo);
+    alert('Cadastro realizado com sucesso, ' + nomeLimpo.split(' ')[0] + '!');
     window.location.href = 'home.html';
   });
 }

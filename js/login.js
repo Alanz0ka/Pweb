@@ -6,18 +6,60 @@
  * "Lembrar meu e-mail" e redireciona para a home.
  */
 
-const CHAVE_EMAIL_LEMBRADO = 'emailLembrado';
+var CHAVE_EMAIL_LEMBRADO = 'emailLembrado';
+var CHAVE_CONTA_LOGIN = 'contaUsuario';
+var CHAVE_PERFIL_LOGIN = 'perfilUsuario';
+var CHAVE_SESSAO_LOGIN = 'usuarioLogado';
+
+function carregarContaLogin() {
+  var texto = localStorage.getItem(CHAVE_CONTA_LOGIN);
+  if (!texto) return null;
+
+  try {
+    return JSON.parse(texto);
+  } catch (e) {
+    return null;
+  }
+}
+
+function sincronizarPerfilLogin(conta) {
+  var texto = localStorage.getItem(CHAVE_PERFIL_LOGIN);
+  var perfil = null;
+
+  if (texto) {
+    try {
+      perfil = JSON.parse(texto);
+    } catch (e) {
+      perfil = null;
+    }
+  }
+
+  if (!perfil) {
+    perfil = {
+      nome: conta.nome,
+      email: conta.email,
+      cidade: '',
+      renda: '',
+      perfil: 'Moderado',
+      objetivo: ''
+    };
+  }
+
+  perfil.nome = conta.nome;
+  perfil.email = conta.email;
+  localStorage.setItem(CHAVE_PERFIL_LOGIN, JSON.stringify(perfil));
+}
 
 function configurarLogin() {
-  const form = document.getElementById('form-login');
+  var form = document.getElementById('form-login');
   if (!form) return;
 
-  const email = document.getElementById('email');
-  const senha = document.getElementById('senha');
-  const lembrar = document.getElementById('lembrar');
+  var email = document.getElementById('email');
+  var senha = document.getElementById('senha');
+  var lembrar = document.getElementById('lembrar');
 
   // Se o usuario marcou "lembrar" antes, preenche o email automaticamente.
-  const emailLembrado = localStorage.getItem(CHAVE_EMAIL_LEMBRADO);
+  var emailLembrado = localStorage.getItem(CHAVE_EMAIL_LEMBRADO);
   if (emailLembrado) {
     email.value = emailLembrado;
     if (lembrar) lembrar.checked = true;
@@ -27,8 +69,9 @@ function configurarLogin() {
     evento.preventDefault();
     limparErros(form);
 
-    let ok = true;
-    if (!emailValido(email.value)) {
+    var ok = true;
+    var emailLimpo = email.value.trim().toLowerCase();
+    if (!emailValido(emailLimpo)) {
       mostrarErro(email, 'Informe um e-mail valido.');
       ok = false;
     }
@@ -38,13 +81,21 @@ function configurarLogin() {
     }
     if (!ok) return;
 
+    var conta = carregarContaLogin();
+    if (!conta || conta.email !== emailLimpo || conta.senha !== senha.value) {
+      mostrarErro(senha, 'E-mail ou senha incorretos. Cadastre uma conta antes de entrar.');
+      return;
+    }
+
     // Salva ou apaga o email lembrado conforme o checkbox.
     if (lembrar && lembrar.checked) {
-      localStorage.setItem(CHAVE_EMAIL_LEMBRADO, email.value);
+      localStorage.setItem(CHAVE_EMAIL_LEMBRADO, emailLimpo);
     } else {
       localStorage.removeItem(CHAVE_EMAIL_LEMBRADO);
     }
 
+    sincronizarPerfilLogin(conta);
+    localStorage.setItem(CHAVE_SESSAO_LOGIN, conta.email);
     alert('Login realizado com sucesso!');
     window.location.href = 'src/home.html';
   });
